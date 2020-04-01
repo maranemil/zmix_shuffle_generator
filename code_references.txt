@@ -1,3 +1,9 @@
+##########################################################################
+#
+#   Code References
+#
+##########################################################################
+
 https://askubuntu.com/questions/350208/what-does-2-dev-null-mean
 https://devhints.io/bash
 https://docs.python.org/2/library/wave.html
@@ -5,11 +11,7 @@ https://docs.python.org/3.3/library/argparse.html
 https://docs.python.org/3/library/wave.html
 https://github.com/jiaaro/pydub
 https://github.com/jiaaro/pydub
-https://www.cyberciti.biz/faq/bash-for-loop/
-https://stackoverflow.com/questions/91368/checking-from-shell-script-if-a-directory-contains-files/17902999
-https://stackoverflow.com/questions/3411048/unexpected-operator-in-shell-programming
 https://github.com/jiaaro/pydub
-https://www.cyberciti.biz/faq/linux-unix-bash-for-loop-one-line-command/
 https://ipython.org/install.html
 https://medium.com/better-programming/simple-audio-processing-in-python-with-pydub-c3a217dabf11
 https://pynative.com/python-random-choice/
@@ -18,20 +20,21 @@ https://stackoverflow.com/questions/10607688/how-to-create-a-file-name-with-the-
 https://stackoverflow.com/questions/13982042/random-in-bash-doesnt-work
 https://stackoverflow.com/questions/185936/how-to-delete-the-contents-of-a-folder
 https://stackoverflow.com/questions/2890703/how-to-join-two-wav-files-using-python
+https://stackoverflow.com/questions/3411048/unexpected-operator-in-shell-programming
 https://stackoverflow.com/questions/42492246/how-to-normalize-the-volume-of-an-audio-file-in-python-any-packages-currently-a
+https://stackoverflow.com/questions/43963982/python-change-pitch-of-wav-file
 https://stackoverflow.com/questions/4783810/install-tkinter-for-python
 https://stackoverflow.com/questions/5992638/shell-script-random-number-generating
 https://stackoverflow.com/questions/7833807/get-wav-file-length-or-duration
+https://stackoverflow.com/questions/91368/checking-from-shell-script-if-a-directory-contains-files/17902999
 https://superuser.com/questions/587511/concatenate-multiple-wav-files-using-single-command-without-extra-file
 https://unix.stackexchange.com/questions/492366/iterating-over-files-in-bash-and-obtaining-the-index-and-the-counts
 https://www.audiolabs-erlangen.de/resources/MIR/FMP/B/B_PythonAudio.html
 https://www.audiolabs-erlangen.de/resources/MIR/FMP/B/B_PythonAudio.html
+https://www.cyberciti.biz/faq/bash-for-loop/
+https://www.cyberciti.biz/faq/linux-unix-bash-for-loop-one-line-command/
 https://www.programiz.com/python-programming/time/sleep
 https://www.taniarascia.com/how-to-create-and-use-bash-scripts/
 https://www.tutorialspoint.com/execute_bash_online.php
 https://www.w3schools.com/python/python_file_remove.asp
 https://www.w3schools.com/python/python_for_loops.asp
-
-
-
-
