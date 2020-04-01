@@ -22,7 +22,7 @@ done
 if [ "$HELP" == "yes" ]; then
   echo "--------------------------------------------------"
   echo "HELP: "
-  echo "usage: bash run_bash_zmix.sh -i load/input.wav -d yes -t * "
+  echo "usage: bash zmix.sh -i load/input.wav -d yes -t * "
   echo ""
   echo "options:"
   echo "-h yes        - help"

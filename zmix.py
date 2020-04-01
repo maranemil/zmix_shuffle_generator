@@ -18,7 +18,7 @@ import glob
 """
 pip install pydub
 usage 
-python run_python_zmix.py --input load/input.wav  --clean true --reverse true
+python zmix.py --input load/input.wav  --clean true --reverse true
 """
 
 print( "------------------start---------------------------")
