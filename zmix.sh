@@ -6,7 +6,7 @@
 #
 #############################################
 
-shopt -s nullglob dotglob
+#shopt -s nullglob dotglob
 
 while getopts i:h:d:t: option; do
   # shellcheck disable=SC2220
@@ -17,7 +17,6 @@ while getopts i:h:d:t: option; do
   t) TYPE=${OPTARG} ;;
   esac
 done
-
 
 if [ "$HELP" == "yes" ]; then
   echo "--------------------------------------------------"
@@ -53,7 +52,7 @@ echo "Delete existing files? " $DEL
 #--------------------------------------------
 # REMOVE OLD SPLIT FILES
 #--------------------------------------------
-if [ $DEL == "yes" ]; then
+if [ "$DEL" == "yes" ]; then
   files=(/split/*)
   if [ ${#files[@]} -gt 0 ]; then
     for f in split/*.wav; do
@@ -117,15 +116,15 @@ for i in 1 2 3 4 5 6 7; do
   # shellcheck disable=SC2086
   echo "Random Sequences: " $RANDOM1, $RANDOM2, $RANDOM3, $RANDOM4, $RANDOM5, $RANDOM6
   cmd="ffmpeg
-   -i split/split_00$RANDOM1.wav
-   -i split/split_00$RANDOM2.wav
-   -i split/split_00$RANDOM3.wav
-   -i split/split_00$RANDOM4.wav
-   -i split/split_00$RANDOM5.wav
-   -i split/split_00$RANDOM6.wav
-   -filter_complex '[0:0][1:0][2:0][3:0][4:0][5:0]concat=n=6:v=0:a=1[out]'
-   -vf reverse -map '[out]' output/zmix_$(date +%s).wav 2>/dev/null"
-    # shellcheck disable=SC2086
+  -i split/split_00$RANDOM1.wav
+  -i split/split_00$RANDOM2.wav
+  -i split/split_00$RANDOM3.wav
+  -i split/split_00$RANDOM4.wav
+  -i split/split_00$RANDOM5.wav
+  -i split/split_00$RANDOM6.wav
+  -filter_complex [0:0][1:0][2:0][3:0][4:0][5:0]concat=n=6:v=0:a=1[out]
+  -map '[out]' output/zmix_$(date +%s).wav 2>/dev/null " # -report
+  # shellcheck disable=SC2086
   eval $cmd
   sleep 2s
 done
