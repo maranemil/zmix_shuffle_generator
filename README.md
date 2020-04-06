@@ -15,7 +15,7 @@
 - [x] Zmix Experiments 3 - (AudioSegment random joiner + AudioEffectsChain fx reverb phaser octave)
 
 
-### Installation and Requrements
+### Installation and Requirements
 
 ``` 
 mkdir ~/Git && cd ~/Git
@@ -30,7 +30,6 @@ sudo apt install sox  -y
 pip3 install pydub
 pip3 install pysndfx
 pip3 install librosa
-
 ``` 
 
 
