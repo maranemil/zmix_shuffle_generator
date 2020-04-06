@@ -1,14 +1,18 @@
 # zmix_shuffle_generator
-Zmix - shuffle generator for audio files for bash and python
 
+> Zmix - shuffle generator for audio files for bash and python
 
+- [x] Zmix Bash - (wav spliter 1 second + random joiner)
+- [x] Zmix Python - (wav spliter 1 second + random joiner)
+- [x] Zmix Experiments 1 - (AudioSegment random joiner + reverse)
+- [x] Zmix Experiments 2 - (AudioSegment random joiner + AudioEffectsChain fx reverb phaser )
+- [x] Zmix Experiments 3 - (AudioSegment random joiner + AudioEffectsChain fx reverb phaser octave)
 
 
 ### Usage Example Screenshot
 
 #### Bash
 [![Editor Screen](https://raw.githubusercontent.com/maranemil/zmix_shuffle_generator/master/demosample/Screenshot1.png)](#features)
-
 
 #### Python
 [![Editor Screen](https://raw.githubusercontent.com/maranemil/zmix_shuffle_generator/master/demosample/Screenshot2.png)](#features)
@@ -26,20 +30,20 @@ Zmix - shuffle generator for audio files for bash and python
 
 ##### Usage Options for Python
 
-python zmix.py --input load/input.wav  --clean true --reverse true
+``` python zmix.py --input load/input.wav  --clean true --reverse true ```
 
-options | description | -
---- | --- | ---
+options | description 
+------------ | ------------ 
 --input  |  specify input file 
 --clean true |   delete old generated temp files
 --reverse true |  apply reverse fx
 
 ##### Usage Options for Bash
 
-bash zmix.sh -i load/input.wav -d yes -t *
+```  bash zmix.sh -i load/input.wav -d yes -t * ```
 
-options| description | -
---- | --- | ---
+options| description 
+------------ | ----------- 
 -h yes  |  - help
 -i file.wav |   - specify input file
 -d yes        | - delete old generated temp files
@@ -47,13 +51,21 @@ options| description | -
 
 Setups ffmpeg filters
 
-option|description|-
---- | --- | ---
+option|description
+------------ | ------------ 
 * | default
 1 | volume=3dB
 2 | volume=3dB, equalizer=f=440:width_type=o:width=2:g=-5,areverse
 3 | volume=3dB,equalizer=f=40:width_type=o:width=2:g=-7,areverse
 4 | volume=3dB,equalizer=f=540:width_type=o:width=2:g=-9,areverse
+
+
+
+> Markup references:
++ https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
++ https://help.github.com/en/github/writing-on-github/basic-writing-and-formatting-syntax
++ https://guides.github.com/features/mastering-markdown/
+
 
 
 <!--
