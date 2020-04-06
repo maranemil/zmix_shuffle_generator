@@ -15,7 +15,6 @@ Zmix - shuffle generator for audio files for bash and python
 
 <!--
 ### Output Samples Example 
-
 <audio controls src="https://raw.githubusercontent.com/maranemil/zmix_shuffle_generator/master/demosample/output_bash_1586171474.wav" type="audio/wav"><code>audio</code></audio>
 <audio controls src="https://raw.githubusercontent.com/maranemil/zmix_shuffle_generator/master/demosample/output_python_20200406-131715.wav" type="audio/wav"><code>audio</code></audio>
 <audio controls src="https://raw.githubusercontent.com/maranemil/zmix_shuffle_generator/master/demosample/output_exp1-20200406-132105.wav" type="audio/wav"><code>audio</code></audio>
