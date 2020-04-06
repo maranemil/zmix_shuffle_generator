@@ -2,6 +2,13 @@
 Zmix - shuffle generator for audio files for bash and python
 
 
+
+
+
+[![Editor Screen](https://raw.githubusercontent.com/maranemil/random_datamatrix_generator/master/screens/screen%20py3_gen.png)](#features)
+
+
+
 ## Usage
 
 ### Usage from Python
