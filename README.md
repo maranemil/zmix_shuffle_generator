@@ -49,9 +49,9 @@ options| description
 -d yes        | - delete old generated temp files
 -t *          | - chose setup for split:
 
-Setups ffmpeg filters
+> Setups ffmpeg filters
 
-option|description
+option | description
 ------------ | ------------ 
 * | default
 1 | volume=3dB
