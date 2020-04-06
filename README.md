@@ -4,14 +4,22 @@ Zmix - shuffle generator for audio files for bash and python
 
 
 
+### Usage Example Screenshot
 
-[![Editor Screen](https://raw.githubusercontent.com/maranemil/random_datamatrix_generator/master/screens/screen%20py3_gen.png)](#features)
+#### Bash
+[![Editor Screen](https://raw.githubusercontent.com/maranemil/zmix_shuffle_generator/master/demosample/Screenshot1.png)](#features)
+
+
+#### Python
+[![Editor Screen](https://raw.githubusercontent.com/maranemil/zmix_shuffle_generator/master/demosample/Screenshot2.png)](#features)
 
 
 
-## Usage
 
-### Usage from Python
+
+### Usage Options
+
+#### Usage from Python
 
 python zmix.py --input load/input.wav  --clean true --reverse true
 
@@ -22,7 +30,7 @@ options | description | *
 --clean true |   delete old generated temp files
 --reverse true |  apply reverse fx
 
-### Usage from Bash
+#### Usage from Bash
 
 bash zmix.sh -i load/input.wav -d yes -t *
 
