@@ -1,6 +1,11 @@
 # zmix_shuffle_generator
 
 > Zmix - shuffle generator for audio files for bash and python
+>
+> Logic 
+[![Editor Screen](https://raw.githubusercontent.com/maranemil/zmix_shuffle_generator/master/demosample/Screenshot3.png)](#features)
+>
+>
 
 - [x] Zmix Bash - (wav spliter 1 second interval + random joiner)
 - [x] Zmix Python - (wav spliter 1 second interval + random joiner)
