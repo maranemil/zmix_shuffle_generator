@@ -2,8 +2,8 @@
 
 > Zmix - shuffle generator for audio files for bash and python
 
-- [x] Zmix Bash - (wav spliter 1 second + random joiner)
-- [x] Zmix Python - (wav spliter 1 second + random joiner)
+- [x] Zmix Bash - (wav spliter 1 second interval + random joiner)
+- [x] Zmix Python - (wav spliter 1 second interval + random joiner)
 - [x] Zmix Experiments 1 - (AudioSegment random joiner + reverse)
 - [x] Zmix Experiments 2 - (AudioSegment random joiner + AudioEffectsChain fx reverb phaser )
 - [x] Zmix Experiments 3 - (AudioSegment random joiner + AudioEffectsChain fx reverb phaser octave)
