@@ -3,6 +3,7 @@
 > Zmix - shuffle generator for audio files for bash and python
 >
 > Logic 
+
 [![Editor Screen](https://raw.githubusercontent.com/maranemil/zmix_shuffle_generator/master/demosample/Screenshot3.png)](#features)
 >
 >
