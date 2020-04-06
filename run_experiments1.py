@@ -19,6 +19,7 @@ for f in files:
 # list spited files
 SPLIT_FOLDER = 'split/'
 files_list = [os.path.join(folder, i) for folder, subdirs, files in os.walk(SPLIT_FOLDER) for i in files]
+random.shuffle(files_list)
 print(files_list)
 
 
