@@ -15,14 +15,12 @@ Zmix - shuffle generator for audio files for bash and python
 
 ### Output Samples Example 
 
-<audio controls>
-  <source src="https://raw.githubusercontent.com/maranemil/zmix_shuffle_generator/master/demosample/output_bash_1586171474.wav" type="audio/wav">
-  <source src="https://raw.githubusercontent.com/maranemil/zmix_shuffle_generator/master/demosample/output_python_20200406-131715.wav" type="audio/wav">
-  <source src="https://raw.githubusercontent.com/maranemil/zmix_shuffle_generator/master/demosample/output_exp1-20200406-132105.wav" type="audio/wav">
-  <source src="https://raw.githubusercontent.com/maranemil/zmix_shuffle_generator/master/demosample/output_exp2_20200406-132314.wav.ogg" type="audio/ogg">
-  <source src="https://raw.githubusercontent.com/maranemil/zmix_shuffle_generator/master/demosample/output_exp3_20200406-135654.wav.ogg" type="audio/ogg">
-  Your browser does not support the audio tag.
-</audio>
+<audio controls src="https://raw.githubusercontent.com/maranemil/zmix_shuffle_generator/master/demosample/output_bash_1586171474.wav" type="audio/wav"><code>audio</code></audio>
+<audio controls src="https://raw.githubusercontent.com/maranemil/zmix_shuffle_generator/master/demosample/output_python_20200406-131715.wav" type="audio/wav"><code>audio</code></audio>
+<audio controls src="https://raw.githubusercontent.com/maranemil/zmix_shuffle_generator/master/demosample/output_exp1-20200406-132105.wav" type="audio/wav"><code>audio</code></audio>
+<audio controls src="https://raw.githubusercontent.com/maranemil/zmix_shuffle_generator/master/demosample/output_exp2_20200406-132314.wav.ogg" type="audio/ogg"><code>audio</code></audio>
+<audio controls src="https://raw.githubusercontent.com/maranemil/zmix_shuffle_generator/master/demosample/output_exp3_20200406-135654.wav.ogg" type="audio/ogg"><code>audio</code></audio>
+
 
 ### Usage Options
 
