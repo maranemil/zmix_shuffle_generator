@@ -22,46 +22,42 @@ Zmix - shuffle generator for audio files for bash and python
 <audio controls src="https://raw.githubusercontent.com/maranemil/zmix_shuffle_generator/master/demosample/output_exp3_20200406-135654.wav.ogg" type="audio/ogg"><code>audio</code></audio>
 -->
 
-### Usage Options
+#### Usage Options
 
-#### Usage from Python
+##### Usage Options for Python
 
 python zmix.py --input load/input.wav  --clean true --reverse true
 
-
-options | description | *
+options | description | -
 --- | --- | ---
 --input  |  specify input file 
 --clean true |   delete old generated temp files
 --reverse true |  apply reverse fx
 
-#### Usage from Bash
+##### Usage Options for Bash
 
 bash zmix.sh -i load/input.wav -d yes -t *
 
-options| description | *
+options| description | -
 --- | --- | ---
-h yes  |  - help
+-h yes  |  - help
 -i file.wav |   - specify input file
 -d yes        | - delete old generated temp files
 -t *          | - chose setup for split:
 
-SETUPS ffmpeg filters
+Setups ffmpeg filters
+
+option|description|-
 --- | --- | ---
-* = default
-1 = volume=3dB
-2 = volume=3dB, equalizer=f=440:width_type=o:width=2:g=-5,areverse
-3 = volume=3dB,equalizer=f=40:width_type=o:width=2:g=-7,areverse
-4 = volume=3dB,equalizer=f=540:width_type=o:width=2:g=-9,areverse
+* | default
+1 | volume=3dB
+2 | volume=3dB, equalizer=f=440:width_type=o:width=2:g=-5,areverse
+3 | volume=3dB,equalizer=f=40:width_type=o:width=2:g=-7,areverse
+4 | volume=3dB,equalizer=f=540:width_type=o:width=2:g=-9,areverse
 
 
-
-
-
-
-
-
-
+<!--
 ##### Add git ignore
 * echo ".idea/*" >> .gitignore
 * git commit -am "remove .idea"
+-->
