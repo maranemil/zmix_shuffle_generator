@@ -53,11 +53,11 @@ options| description
 
 option | description
 ------------ | ------------ 
-* | default
 1 | volume=3dB
 2 | volume=3dB, equalizer=f=440:width_type=o:width=2:g=-5,areverse
 3 | volume=3dB,equalizer=f=40:width_type=o:width=2:g=-7,areverse
 4 | volume=3dB,equalizer=f=540:width_type=o:width=2:g=-9,areverse
+* | default
 
 
 
