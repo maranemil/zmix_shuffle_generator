@@ -111,10 +111,7 @@ http://tones.wolfram.com/
 ------------------------------------------------------
 
 python generate.py — wav_out_path=generated20500.wav — samples 64000 ./logdir/train/2017–12–06T12–02–55/model.ckpt-20500
-
 python train.py — data_dir=/home/ubuntu/data/happy_ambient/ — silence_threshold=0.1
-
-
 python train.py — data_dir=/home/ubuntu/data/happy_ambient/ — silence_threshold=0.01
 
 --------------------------------------------------
