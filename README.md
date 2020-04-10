@@ -30,6 +30,7 @@ sudo apt install sox  -y
 pip3 install pydub
 pip3 install pysndfx
 pip3 install librosa
+pip3 install soundstretch numpy scipy
 ``` 
 
 
