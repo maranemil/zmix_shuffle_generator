@@ -13,6 +13,7 @@
 - [x] Zmix Experiments 1 - (AudioSegment random joiner + reverse)
 - [x] Zmix Experiments 2 - (AudioSegment random joiner + AudioEffectsChain fx reverb phaser )
 - [x] Zmix Experiments 3 - (AudioSegment random joiner + AudioEffectsChain fx reverb phaser octave)
+- [x] Zmix Experiments 4 - (AudioSegment random joiner + AudioEffectsChain octave + SoundStretch aka Paulstretcher )
 
 
 ### Installation and Requirements
