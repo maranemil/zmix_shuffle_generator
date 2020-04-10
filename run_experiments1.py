@@ -4,12 +4,6 @@ from pydub import AudioSegment
 import os
 import random
 import time
-
-##############################################
-#
-#  Read ~1 sec  / 25000 frames from WAV
-#
-##############################################
 import glob
 
 files = glob.glob('output/*')
