@@ -16,7 +16,9 @@ files = glob.glob('output/*')
 for f in files:
     os.remove(f)
 
-# list spited files
+# ----------------------------------------
+# create shuffle list from spitted files
+# ----------------------------------------
 SPLIT_FOLDER = 'split/'
 files_list = [os.path.join(folder, i) for folder, subdirs, files in os.walk(SPLIT_FOLDER) for i in files]
 random.shuffle(files_list)
@@ -27,15 +29,24 @@ def match_target_amplitude(sound, target_dBFS):
     change_in_dBFS = target_dBFS - sound.dBFS
     return sound.apply_gain(change_in_dBFS)
 
-
+# ----------------------------------------
+# Iterate
+# ----------------------------------------
 for i in files_list:
+
     time.sleep(2)
+
+    # create new segments
     sound1 = AudioSegment.from_wav(random.choice(files_list))
     sound2 = AudioSegment.from_wav(random.choice(files_list))
     sound3 = AudioSegment.from_wav(random.choice(files_list))
     sound4 = AudioSegment.from_wav(random.choice(files_list))
     sound5 = AudioSegment.from_wav(random.choice(files_list))
     sound6 = AudioSegment.from_wav(random.choice(files_list))
+
+    # ----------------------------------------
+    # start mixing segments
+    # ----------------------------------------
 
     sound1 = sound1.reverse()[-300:] * 2
     sound2 = sound2.reverse() - 3
