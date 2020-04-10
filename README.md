@@ -85,6 +85,15 @@ option | description
 4 | volume=3dB,equalizer=f=540:width_type=o:width=2:g=-9,areverse
 "*" | default
 
+#### Examples - Youtube Videos
+
+[![Zmix - shuffle output bash](http://img.youtube.com/vi/g1XwexxZ86Q/1.jpg)](https://www.youtube.com/watch?v=g1XwexxZ86Q)
+[![Zmix - shuffle output python](http://img.youtube.com/vi/kYyK19MFMRc/2.jpg)](https://www.youtube.com/watch?v=kYyK19MFMRc)
+[![Zmix - shuffle output python experiment 1](http://img.youtube.com/vi/cLWWwwlkrBc/1.jpg)](https://www.youtube.com/watch?v=cLWWwwlkrBc)
+[![Zmix - shuffle output python experiment 2](http://img.youtube.com/vi/GBnIkZj_vso/1.jpg)](https://www.youtube.com/watch?v=GBnIkZj_vso)
+[![Zmix - shuffle output python experiment 4](http://img.youtube.com/vi/nHA5iLdDm5E/1.jpg)](https://www.youtube.com/watch?v=nHA5iLdDm5E)
+[![Zmix - shuffle output python experiment 3](http://img.youtube.com/vi/-qVeEIACS_k/2.jpg)](https://www.youtube.com/watch?v=-qVeEIACS_k)
+
 
 
 > Markup references:
