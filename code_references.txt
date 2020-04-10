@@ -75,7 +75,6 @@ https://pytorch.org/tutorials/beginner/audio_preprocessing_tutorial.html
 https://pytorch.org/tutorials/beginner/audio_classifier_tutorial.html?highlight=audio
 https://colab.research.google.com/notebooks/magenta/gansynth/gansynth_demo.ipynb#scrollTo=JndnmDMp66FL
 
-
 https://magenta.tensorflow.org/
 https://magenta.tensorflow.org/
 https://github.com/tensorflow/magenta
