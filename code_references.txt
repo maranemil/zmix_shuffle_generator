@@ -141,6 +141,18 @@ https://audiosegment.readthedocs.io/en/latest/audiosegment.html
 https://www.programcreek.com/python/example/89506/pydub.AudioSegment.from_file
 https://www.programcreek.com/python/example/89505/pydub.AudioSegment.from_wav
 
+AudioSegment
+https://github.com/jiaaro/pydub/blob/master/API.markdown
+
+FX Paul's Extreme Sound Stretch
+https://pypi.org/project/soundstretch/
+
+AudioEffectsChain
+https://pypi.org/project/pysndfx/
+
+OGG to WAV Convertor
+https://pypi.org/project/PySoundFile/
+
 
 
 
