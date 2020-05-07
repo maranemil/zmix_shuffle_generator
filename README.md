@@ -32,6 +32,17 @@ pip3 install pydub
 pip3 install pysndfx
 pip3 install librosa
 pip3 install soundstretch numpy scipy
+
+// after update to Ubuntu 20.04
+https://librosa.github.io/librosa/install.html
+https://pypi.org/project/pysndfx/
+
+sudo apt-get install python3-pip -y
+pip3 install librosa
+pip3 install pydub
+pip3 install pysndfx
+pip3 install soundstretch
+
 ``` 
 
 
