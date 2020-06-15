@@ -47,7 +47,7 @@ pip3 install numba==0.43.0
 pip3 install llvmlite==0.32.1
 pip3 install colorama==0.3.9
 
-fix for pytho3.8
+fix for pytho3.8 , Successfully installed llvmlite-0.31.0 numba-0.48.0
 
 pip3 install numba==0.48
 #pip3 install numba==0.50.0
