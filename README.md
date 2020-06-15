@@ -43,6 +43,13 @@ pip3 install pydub
 pip3 install pysndfx
 pip3 install soundstretch
 
+pip3 install numba==0.43.0
+pip3 install llvmlite==0.32.1
+pip3 install colorama==0.3.9
+
+https://pypi.org/project/colorama/
+
+
 ``` 
 
 
