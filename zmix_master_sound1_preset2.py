@@ -52,3 +52,21 @@ combined_sounds = sound20.overlay(sound10, position=0, gain_during_overlay=-12)
 overlayOutput = "output/mixoverlay_" + time.strftime("%Y%m%d-%H%M%S") + ".wav"
 normalized_sound = match_target_amplitude(combined_sounds, -16.0)  # normalized
 normalized_sound.export(overlayOutput, format="wav")
+
+
+"""
+# alternative for multiple files - do a copy into separate folder
+overlayOutput = "output/" + os.path.basename(filename)
+normalized_sound = match_target_amplitude(combined_sounds, -16.0)  # normalized
+normalized_sound.export(overlayOutput, format="wav")
+
+from shutil import copyfile
+copyfile(overlayOutput, "done/" + os.path.basename(filename))
+"""
+
+"""
+# bash batch for multiple files
+for i in {001..002}; do python3 zmix_master_sound1_preset2.py --input load/fumix$i.wav; done 
+"""
+
+
