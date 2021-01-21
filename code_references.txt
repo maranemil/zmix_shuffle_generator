@@ -1,9 +1,13 @@
 
-#
+##########################################################################
 #
 #   Code References
+#
 ##########################################################################
-##########################################################################
+
+https://www.cyberciti.biz/faq/unix-linux-bash-script-check-if-variable-is-empty/
+https://www.cyberciti.biz/faq/bash-get-basename-of-filename-or-directory-name/
+
 http://omz-software.com/editorial/docs/ios/sound.html
 http://omz-software.com/pythonista/docs/ios/sound.html
 http://omz-software.com/pythonista/docs/ios/sound.html

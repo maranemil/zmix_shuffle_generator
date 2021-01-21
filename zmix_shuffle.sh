@@ -18,7 +18,7 @@ done
 if [ "$HELP" == "yes" ]; then
   echo "--------------------------------------------------"
   echo "HELP: "
-  echo "usage: bash zmix.sh -i load/input.wav -d yes -t * "
+  echo "usage: bash zmix.sh -i load/input.wav -d yes "
   echo ""
   echo "options:"
   echo "-h yes        - help"
@@ -84,4 +84,3 @@ for i in 1 2 3 4 5 6 7; do
     eval $cmd
   sleep 2s
 done
-

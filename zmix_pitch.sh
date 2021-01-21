@@ -6,6 +6,7 @@
 #
 #############################################
 
+
 # requirements
 # sudo apt install rubberband-cli
 # sudo apt install ffmpeg
@@ -84,6 +85,13 @@ if [ "$DEL" == "yes" ]; then
       #echo "Removed file: $f"
     done
   fi
+  files=(/rubberband/*)
+  if [ ${#files[@]} -gt 0 ]; then
+    for f in rubberband/*.wav; do
+      rm $f
+      #echo "Removed file: $f"
+    done
+  fi
 fi
 
 sleep 2s
@@ -117,6 +125,21 @@ esac
 
 sleep 2s
 
+
+echo "generating rubberband files"
+if [ ${#files[@]} -gt 0 ]; then
+  for f in split/*.wav; do
+    #echo $f
+    #cmdrb="rubberband -c $(shuf -i0-5 -n1)  -t $(shuf -i0-3 -n1)  -T $(shuf -i0-1 -n1)   -p $(shuf -i0-8 -n1) $f rubberband/$(basename $f) 2>/dev/null"
+    #cmdrb="rubberband -c $(shuf -i0-3 -n1)  -t $(shuf -i0-5 -n1)  -T $(shuf -i0-2 -n1)   -p $(shuf -i0-14 -n1) $f rubberband/$(basename $f) 2>/dev/null"
+    cmdrb="rubberband -c $(shuf -i0-3 -n1)  -t $(shuf -i0-2 -n1)  -T $(shuf -i0-2 -n1)   -p $(shuf -i0-8 -n1) $f rubberband/$(basename $f) 2>/dev/null"
+    eval $cmdrb
+  done
+fi
+
+
+
+
 # shellcheck disable=SC2034
 for i in 1 2 3 4 5 6 7; do
   #--------------------------------------------
@@ -133,12 +156,12 @@ for i in 1 2 3 4 5 6 7; do
   # shellcheck disable=SC2086
   echo "Random Sequences: " $RANDOM1, $RANDOM2, $RANDOM3, $RANDOM4, $RANDOM5, $RANDOM6
   cmd="ffmpeg
-  -i split/split_00$RANDOM1.wav
-  -i split/split_00$RANDOM2.wav
-  -i split/split_00$RANDOM3.wav
-  -i split/split_00$RANDOM4.wav
-  -i split/split_00$RANDOM5.wav
-  -i split/split_00$RANDOM6.wav
+  -i rubberband/split_00$RANDOM1.wav
+  -i rubberband/split_00$RANDOM2.wav
+  -i rubberband/split_00$RANDOM3.wav
+  -i rubberband/split_00$RANDOM4.wav
+  -i rubberband/split_00$RANDOM5.wav
+  -i rubberband/split_00$RANDOM6.wav
   -filter_complex [0:0][1:0][2:0][3:0][4:0][5:0]concat=n=6:v=0:a=1[out]
   -map '[out]' output/zmix_$(date +%s).wav 2>/dev/null " # -report
   # shellcheck disable=SC2086
