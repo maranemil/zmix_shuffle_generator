@@ -13,26 +13,26 @@
 
 #shopt -s nullglob dotglob
 
-while getopts i:h:d:t:s: option; do
+while getopts "i:h:d:t:s": option; do
   # shellcheck disable=SC2220
-  case "${option}" in
-  i) FILE=${OPTARG} ;;
-  h) HELP=${OPTARG} ;;
-  d) DEL=${OPTARG} ;;
-  t) TYPE=${OPTARG} ;;
-  s) SIZE=${OPTARG} ;;
+  case ${option} in
+      i) FILE=${OPTARG} ;;
+      h) HELP=1 && echo "Option -h übergeben" ;;
+      d) DEL=${OPTARG} ;;
+      t) TYPE=${OPTARG} ;;
+      s) SIZE=${OPTARG} ;;
   esac
 done
 
-if [[ "$HELP" ]]; then
+if [[ $HELP ]]; then
   echo "--------------------------------------------------"
   echo "HELP: "
-  echo "usage: bash zmix_pitch.sh -i load/in.wav -d y -t 1"
+  echo "usage: bash zmix_pitch.sh -i load/in.wav -d yes -t 1"
   echo ""
   echo "options:"
   echo "-h yes        - help"
   echo "-i file.wav   - specify input file"
-  echo "-d y        - delete old generated temp files"
+  echo "-d yes        - delete old generated temp files"
   echo "-t *          - chose setup for split:"
   echo "               * = default "
   echo "               1 = volume=3dB"
@@ -50,9 +50,9 @@ if [ "$DEL" ]; then
 fi
 
 
-# if arg i is set
+# if arg i is not set
 if [ -z "$FILE" ] || [ "$FILE" == "" ]; then
-  echo "\FILE not specified. Exit."
+  echo "\FILE for input not specified. Exit."
   exit
 fi
 
@@ -63,10 +63,12 @@ if [ -z "$SIZE" ]
 then
       echo "\$SIZE is empty"
       SIZE=1.3
+      #
 else
       echo "\$SIZE is NOT empty"
 fi
 echo "size specified is: " $SIZE
+
 echo "Loaded File: " $FILE
 
 if [ ! -f $FILE ]; then
@@ -90,15 +92,15 @@ if [ "$DEL" ]; then
   files=(/output/*)
   if [ ${#files[@]} -gt 0 ]; then
     for f in output/*.wav; do
-      #rm $f
-      echo "Removed file: $f"
+      rm $f
+      #echo "Removed file: $f"
     done
   fi
   files=(/rubberband/*)
   if [ ${#files[@]} -gt 0 ]; then
     for f in rubberband/*.wav; do
-      #rm $f
-      echo "Removed file: $f"
+      rm $f
+      #echo "Removed file: $f"
     done
   fi
 fi
@@ -108,6 +110,8 @@ sleep 2s
 #--------------------------------------------
 # SPLIT WAV N FILES 1 SECOND LENGTH
 #--------------------------------------------
+
+echo "Spliting file in segments ... "
 
 case $TYPE in
 1)
@@ -135,7 +139,8 @@ esac
 sleep 4s
 
 
-echo "generating rubberband files"
+echo "generating rubberband files ... "
+
 if [ ${#files[@]} -gt 0 ]; then
   for f in split/*.wav; do
     echo $f
@@ -146,15 +151,19 @@ if [ ${#files[@]} -gt 0 ]; then
   done
 fi
 
-exit;
+#exit;
+
 sleep 4s
 
+echo "generating outputmix files ... "
 
 # shellcheck disable=SC2034
 for i in 1 2 3 4 5 6 7; do
+
   #--------------------------------------------
   #CONCAT 4 WAVS - Rand(10+x)
   #--------------------------------------------
+
   # generate random number from 0 to 7
   RANDOM1=$(shuf -i0-7 -n1)
   RANDOM2=$(shuf -i0-7 -n1)
@@ -176,7 +185,7 @@ for i in 1 2 3 4 5 6 7; do
   -map '[out]' output/zmix_$(date +%s).wav 2>/dev/null " # -report
   # shellcheck disable=SC2086
   eval $cmd
-  sleep 2s
+  sleep 5s
 done
 
 echo "------------------finish---------------------------"
