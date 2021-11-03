@@ -24,15 +24,15 @@ while getopts i:h:d:t:s: option; do
   esac
 done
 
-if [ "$HELP" == "yes" ]; then
+if [[ "$HELP" ]]; then
   echo "--------------------------------------------------"
   echo "HELP: "
-  echo "usage: bash zmix.sh -i load/input.wav -d yes -t * "
+  echo "usage: bash zmix_pitch.sh -i load/in.wav -d y -t 1"
   echo ""
   echo "options:"
   echo "-h yes        - help"
   echo "-i file.wav   - specify input file"
-  echo "-d yes        - delete old generated temp files"
+  echo "-d y        - delete old generated temp files"
   echo "-t *          - chose setup for split:"
   echo "               * = default "
   echo "               1 = volume=3dB"
@@ -43,20 +43,30 @@ if [ "$HELP" == "yes" ]; then
   exit
 fi
 
+# check if arg d is set
+if [ "$DEL" ]; then
+  DEL="yes"
+  echo "\DEL set to $DEL."
+fi
+
+
+# if arg i is set
+if [ -z "$FILE" ] || [ "$FILE" == "" ]; then
+  echo "\FILE not specified. Exit."
+  exit
+fi
+
+
 echo "------------------start---------------------------"
-
-
 
 if [ -z "$SIZE" ]
 then
       echo "\$SIZE is empty"
-      SIZE=1
-      #exit
+      SIZE=1.3
 else
       echo "\$SIZE is NOT empty"
 fi
 echo "size specified is: " $SIZE
-
 echo "Loaded File: " $FILE
 
 if [ ! -f $FILE ]; then
@@ -65,12 +75,11 @@ if [ ! -f $FILE ]; then
 fi
 
 echo "Delete existing files? " $DEL
-# exit;
 
 #--------------------------------------------
 # REMOVE OLD SPLIT FILES
 #--------------------------------------------
-if [ "$DEL" == "yes" ]; then
+if [ "$DEL" ]; then
   files=(/split/*)
   if [ ${#files[@]} -gt 0 ]; then
     for f in split/*.wav; do
@@ -81,15 +90,15 @@ if [ "$DEL" == "yes" ]; then
   files=(/output/*)
   if [ ${#files[@]} -gt 0 ]; then
     for f in output/*.wav; do
-      rm $f
-      #echo "Removed file: $f"
+      #rm $f
+      echo "Removed file: $f"
     done
   fi
   files=(/rubberband/*)
   if [ ${#files[@]} -gt 0 ]; then
     for f in rubberband/*.wav; do
-      rm $f
-      #echo "Removed file: $f"
+      #rm $f
+      echo "Removed file: $f"
     done
   fi
 fi
@@ -119,25 +128,26 @@ case $TYPE in
   ;;
 *)
   echo "SETUP default"
-  ffmpeg -i "$FILE" -map 0 -f segment -segment_time "$SIZE" -c copy -y split/split_%03d.wav 2>/dev/null
+  ffmpeg -i "$FILE" -map 0 -f segment -segment_time "$SIZE" -c copy -y split/split_%03d.wav -t 9 2>/dev/null
   ;;
 esac
 
-sleep 2s
+sleep 4s
 
 
 echo "generating rubberband files"
 if [ ${#files[@]} -gt 0 ]; then
   for f in split/*.wav; do
-    #echo $f
+    echo $f
     #cmdrb="rubberband -c $(shuf -i0-5 -n1)  -t $(shuf -i0-3 -n1)  -T $(shuf -i0-1 -n1)   -p $(shuf -i0-8 -n1) $f rubberband/$(basename $f) 2>/dev/null"
     #cmdrb="rubberband -c $(shuf -i0-3 -n1)  -t $(shuf -i0-5 -n1)  -T $(shuf -i0-2 -n1)   -p $(shuf -i0-14 -n1) $f rubberband/$(basename $f) 2>/dev/null"
-    cmdrb="rubberband -c $(shuf -i0-3 -n1)  -t $(shuf -i0-2 -n1)  -T $(shuf -i0-2 -n1)   -p $(shuf -i0-8 -n1) $f rubberband/$(basename $f) 2>/dev/null"
+    cmdrb="rubberband -c $(shuf -i0-3 -n1)  -t $(shuf -i0-2 -n1)  -T $(shuf -i0-2 -n1)   -p $(shuf -i0-8 -n1) $f rubberband/$(basename $f) "
     eval $cmdrb
   done
 fi
 
-
+exit;
+sleep 4s
 
 
 # shellcheck disable=SC2034
