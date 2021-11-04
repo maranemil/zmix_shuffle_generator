@@ -4,6 +4,6 @@
 # Define required macros here
 SHELL = /bin/sh
 
-composer-up:
+create-folders:
 	@echo "Create folders"
 	mkdir -p chop output load rubberband split
