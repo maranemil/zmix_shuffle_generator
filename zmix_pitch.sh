@@ -28,6 +28,8 @@ if [[ $HELP ]]; then
   echo "--------------------------------------------------"
   echo "HELP: "
   echo "usage: bash zmix_pitch.sh -i load/in.wav -d yes -t 1"
+  echo "usage: bash zmix_pitch.sh -i load/in.wav -dy -t1"
+  echo "usage: bash zmix_pitch.sh -hy"
   echo ""
   echo "options:"
   echo "-h yes        - help"

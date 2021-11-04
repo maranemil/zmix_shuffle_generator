@@ -18,7 +18,7 @@ done
 if [ "$HELP" == "yes" ]; then
   echo "--------------------------------------------------"
   echo "HELP: "
-  echo "usage: bash zmix.sh -i load/input.wav -d yes -t * "
+  echo "usage: bash zmix_shuffle_v2.sh -i load/input.wav -d yes -t * "
   echo ""
   echo "options:"
   echo "-h yes        - help"
@@ -37,13 +37,19 @@ if [ ! -f $FILE ]; then
   exit
 fi
 
+# check if arg d is set
+if [ "$DEL" ]; then
+  DEL="yes"
+  echo "\DEL set to $DEL."
+fi
+
 echo "Delete existing files? " $DEL
-# exit;
 
 #--------------------------------------------
 # REMOVE OLD SPLIT FILES
 #--------------------------------------------
-if [ "$DEL" == "yes" ]; then
+
+if [ "$DEL" ]; then
   files=(/split/*)
   if [ ${#files[@]} -gt 0 ]; then
     for f in split/*.wav; do
@@ -61,6 +67,21 @@ if [ "$DEL" == "yes" ]; then
 fi
 
 sleep 2s
+
+
+#--------------------------------------------
+# SPLIT WAV N FILES 1 SECOND LENGTH
+#--------------------------------------------
+
+echo "Spliting file in segments ... "
+
+ffmpeg -i "$FILE" -map 0 -f segment -segment_time 0.3 -c copy -y split/split_%03d.wav -t 9 2>/dev/null
+
+#--------------------------------------------
+# SHUFFLE
+#--------------------------------------------
+
+echo "generating shuffle files ... "
 
 for i in 1 2 3 4 5 6 7; do
 
@@ -84,3 +105,5 @@ for i in 1 2 3 4 5 6 7; do
     eval $cmd
   sleep 2s
 done
+
+echo "------------------finish---------------------------"

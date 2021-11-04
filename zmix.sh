@@ -23,10 +23,10 @@ while getopts i:h:d:t:s: option; do
   esac
 done
 
-if [ "$HELP" == "yes" ]; then
+if [ "$HELP" ]; then
   echo "--------------------------------------------------"
   echo "HELP: "
-  echo "usage: bash zmix.sh -i load/input.wav -d yes -t * "
+  echo "usage: bash zmix.sh -i load/in.wav -dy -t * -s 0.6"
   echo ""
   echo "options:"
   echo "-h yes        - help"
@@ -63,13 +63,19 @@ if [ ! -f $FILE ]; then
   exit
 fi
 
+# check if arg d is set
+if [ "$DEL" ]; then
+  DEL="yes"
+  echo "\DEL set to $DEL."
+fi
+
 echo "Delete existing files? " $DEL
 # exit;
 
 #--------------------------------------------
 # REMOVE OLD SPLIT FILES
 #--------------------------------------------
-if [ "$DEL" == "yes" ]; then
+if [ "$DEL" ]; then
   files=(/split/*)
   if [ ${#files[@]} -gt 0 ]; then
     for f in split/*.wav; do
