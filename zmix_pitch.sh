@@ -6,7 +6,6 @@
 #
 #############################################
 
-
 # requirements
 # sudo apt install rubberband-cli
 # sudo apt install ffmpeg
@@ -65,15 +64,14 @@ if [ -z "$SIZE" ]
 then
       echo "\$SIZE is empty"
       SIZE=1.3
-      #
 else
       echo "\$SIZE is NOT empty"
 fi
 echo "size specified is: " $SIZE
 
-echo "Loaded File: " $FILE
+echo "Loaded File: " "$FILE"
 
-if [ ! -f $FILE ]; then
+if [ ! -f "$FILE" ]; then
   echo "File does not exist! Bye!"
   exit
 fi
@@ -87,21 +85,21 @@ if [ "$DEL" ]; then
   files=(/split/*)
   if [ ${#files[@]} -gt 0 ]; then
     for f in split/*.wav; do
-      rm $f
+      rm "$f"
       #echo "Removed file: $f"
     done
   fi
   files=(/output/*)
   if [ ${#files[@]} -gt 0 ]; then
     for f in output/*.wav; do
-      rm $f
+      rm "$f"
       #echo "Removed file: $f"
     done
   fi
   files=(/rubberband/*)
   if [ ${#files[@]} -gt 0 ]; then
     for f in rubberband/*.wav; do
-      rm $f
+      rm "$f"
       #echo "Removed file: $f"
     done
   fi
@@ -145,11 +143,11 @@ echo "generating rubberband files ... "
 
 if [ ${#files[@]} -gt 0 ]; then
   for f in split/*.wav; do
-    echo $f
+    echo "$f"
     #cmdrb="rubberband -c $(shuf -i0-5 -n1)  -t $(shuf -i0-3 -n1)  -T $(shuf -i0-1 -n1)   -p $(shuf -i0-8 -n1) $f rubberband/$(basename $f) 2>/dev/null"
     #cmdrb="rubberband -c $(shuf -i0-3 -n1)  -t $(shuf -i0-5 -n1)  -T $(shuf -i0-2 -n1)   -p $(shuf -i0-14 -n1) $f rubberband/$(basename $f) 2>/dev/null"
-    cmdrb="rubberband -c $(shuf -i0-3 -n1)  -t $(shuf -i0-2 -n1)  -T $(shuf -i0-2 -n1)   -p $(shuf -i0-8 -n1) $f rubberband/$(basename $f) "
-    eval $cmdrb
+    cmdrb="rubberband -c $(shuf -i0-3 -n1)  -t $(shuf -i0-2 -n1)  -T $(shuf -i0-2 -n1)   -p $(shuf -i0-8 -n1) $f rubberband/$(basename "$f") "
+    eval "$cmdrb"
   done
 fi
 
@@ -157,13 +155,13 @@ fi
 
 sleep 4s
 
-echo "generating outputmix files ... "
+echo "generating output files ... "
 
 # shellcheck disable=SC2034
 for i in 1 2 3 4 5 6 7; do
 
   #--------------------------------------------
-  #CONCAT 4 WAVS - Rand(10+x)
+  #CONCAT 4 WAVES - Rand(10+x)
   #--------------------------------------------
 
   # generate random number from 0 to 7

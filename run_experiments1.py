@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+# noinspection PyUnresolvedReferences
 from pydub import AudioSegment
 import os
 import random
@@ -11,8 +12,9 @@ for f in files:
     os.remove(f)
 
 # ----------------------------------------
-# create shuffle list from spitted files
+# create shuffle list from spited files
 # ----------------------------------------
+
 SPLIT_FOLDER = 'split/'
 files_list = [os.path.join(folder, i) for folder, subdirs, files in os.walk(SPLIT_FOLDER) for i in files]
 random.shuffle(files_list)

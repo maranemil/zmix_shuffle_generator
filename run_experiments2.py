@@ -22,8 +22,9 @@ for f in files:
     os.remove(f)
 
 # ----------------------------------------
-# create shuffle list from spitted files
+# create shuffle list from spited files
 # ----------------------------------------
+
 SPLIT_FOLDER = 'split/'
 files_list = [os.path.join(folder, i) for folder, subdirs, files in os.walk(SPLIT_FOLDER) for i in files]
 # files_list = files_list[7:19]  # from 7 to 19

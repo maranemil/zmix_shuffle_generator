@@ -21,10 +21,10 @@ usage
 python zmix.py --input load/input.wav  --clean true --reverse true
 """
 
-print( "------------------start---------------------------")
+print("------------------start---------------------------")
 
 # clean folder content before generating new files
-print ("Remove temp split files")
+print("Remove temp split files")
 files = glob.glob('split/*')
 for f in files:
     os.remove(f)
@@ -60,13 +60,13 @@ for i in range(1, int(loopLimit)):  # Works in milliseconds
     newAudio = newAudio[t1:t2]
     newAudio.export('split/split_' + str(i) + '.wav', format="wav")  # Exports to a wav
 
-print ("Split files Done!")
+print("Split files Done!")
 #############################################
 # WAV Joiner
 #############################################
 
 # clean folder content before generating new files
-print ("Remove temp output files")
+print("Remove temp output files")
 if args.clean:
     files = glob.glob('output/*')
     for f in files:
@@ -75,6 +75,8 @@ if args.clean:
 # list spited files
 SPLIT_FOLDER = 'split/'
 files_list = [os.path.join(folder, i) for folder, subdirs, files in os.walk(SPLIT_FOLDER) for i in files]
+
+
 # print(files_list)
 
 
@@ -108,7 +110,6 @@ for k in range(8):
     print("Loop " + str(k) + " done ...")
 
 print("------------------end---------------------------")
-
 
 """
 OUT_FOLDER = 'output/'

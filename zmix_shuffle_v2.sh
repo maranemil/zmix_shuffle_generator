@@ -6,12 +6,12 @@
 #
 #############################################
 
-while getopts i:h:d:t: option; do
+while getopts "i:h:d": option; do
   # shellcheck disable=SC2220
-  case "${option}" in
-  i) FILE=${OPTARG} ;;
-  h) HELP=${OPTARG} ;;
-  d) DEL=${OPTARG} ;;
+  case ${option} in
+      i) FILE=${OPTARG} ;;
+      h) HELP=${OPTARG} ;;
+      d) DEL=${OPTARG} ;;
   esac
 done
 
@@ -30,9 +30,9 @@ fi
 
 echo "------------------start---------------------------"
 
-echo "Loaded File: " $FILE
+echo "Loaded File: " "$FILE"
 
-if [ ! -f $FILE ]; then
+if [ ! -f "$FILE" ]; then
   echo "File does not exist! Bye!"
   exit
 fi
@@ -53,14 +53,14 @@ if [ "$DEL" ]; then
   files=(/split/*)
   if [ ${#files[@]} -gt 0 ]; then
     for f in split/*.wav; do
-      rm $f
+      rm "$f"
       #echo "Removed file: $f"
     done
   fi
   files=(/output/*)
   if [ ${#files[@]} -gt 0 ]; then
     for f in output/*.wav; do
-      rm $f
+      rm "$f"
       #echo "Removed file: $f"
     done
   fi
@@ -73,7 +73,7 @@ sleep 2s
 # SPLIT WAV N FILES 1 SECOND LENGTH
 #--------------------------------------------
 
-echo "Spliting file in segments ... "
+echo "Splitting file in segments ... "
 
 ffmpeg -i "$FILE" -map 0 -f segment -segment_time 0.3 -c copy -y split/split_%03d.wav -t 9 2>/dev/null
 
@@ -83,6 +83,7 @@ ffmpeg -i "$FILE" -map 0 -f segment -segment_time 0.3 -c copy -y split/split_%03
 
 echo "generating shuffle files ... "
 
+# shellcheck disable=SC2034
 for i in 1 2 3 4 5 6 7; do
 
     RANDOM1=$(shuf -i0-7 -n1)
@@ -102,7 +103,7 @@ for i in 1 2 3 4 5 6 7; do
     -filter_complex \"[0:0]atrim=$RANDOM1:duration=0.5[out1];[1:0]atrim=$RANDOM2:duration=0.5[out2];[2:0]atrim=$RANDOM3:duration=0.5[out3];[3:0]atrim=$RANDOM4:duration=0.5[out4];[4:0]atrim=$RANDOM5:duration=1[out5];
     [5:0]atrim=$RANDOM6:duration=0.5[out6];[out1][out2][out3][out4][out5][out6]concat=n=6:v=0:a=1[a]\" -map [a] output/zmix_$(date +%s).wav 2>/dev/null"
 
-    eval $cmd
+    eval "$cmd"
   sleep 2s
 done
 

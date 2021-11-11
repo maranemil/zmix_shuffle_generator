@@ -58,7 +58,7 @@ echo "size specified is: " $SIZE
 
 echo "Loaded File: " $FILE
 
-if [ ! -f $FILE ]; then
+if [ ! -f "$FILE" ]; then
   echo "File does not exist! Bye!"
   exit
 fi
@@ -79,14 +79,14 @@ if [ "$DEL" ]; then
   files=(/split/*)
   if [ ${#files[@]} -gt 0 ]; then
     for f in split/*.wav; do
-      rm $f
+      rm "$f"
       #echo "Removed file: $f"
     done
   fi
   files=(/output/*)
   if [ ${#files[@]} -gt 0 ]; then
     for f in output/*.wav; do
-      rm $f
+      rm "$f"
       #echo "Removed file: $f"
     done
   fi
