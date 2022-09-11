@@ -334,7 +334,7 @@ https://www.tensorflow.org/tutorials/audio/simple_audio
 # In[12]:
 
 
-audio_file5 = "combined2.wav"
+audio_file5 = "combined.wav"
 waveform5, sample_rate5  = torchaudio.load(audio_file)
 print_stats(waveform, sample_rate=sample_rate)
 plot_waveform(waveform5, sample_rate)
