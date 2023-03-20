@@ -33,11 +33,12 @@ $(function() {
     const urlpiano = "./wav/"
     const raw = "";
 
-    $('.sound').click(function() {
-        let note = arr_piano[Math.floor(Math.random() * arr_piano.length)];
-        console.log(note)
-        var audio = new Audio(urlpiano + note + raw);
-        audio.play();
-    });
+  $('.sound').click(function() {
+    let note = arr_piano[Math.floor(Math.random() * arr_piano.length)];
+    console.log(note)
+    $('#logger').append("<li>" + note + "</li>");
+    var audio = new Audio(urlpiano + note + raw);
+    audio.play();
+  });
 });
 

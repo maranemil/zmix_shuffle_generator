@@ -1,5 +1,16 @@
-.lw {
-    font-size: 60px;
+body {
+  background-color: #444;
 }
-li { list-style: none; margin-bottom: 5px }
-button { padding:  35px ;}
+
+li {
+  list-style: none;
+  margin-bottom: 5px
+}
+
+button {
+  padding: 35px;
+}
+
+#logger-wrapper {
+  background-color: #fff;
+}
