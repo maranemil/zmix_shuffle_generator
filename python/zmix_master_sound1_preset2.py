@@ -1,6 +1,5 @@
 #!/usr/bin/python
 
-
 from librosa import load
 from pydub import AudioSegment
 from pysndfx import AudioEffectsChain
@@ -14,9 +13,7 @@ import time
 import time
 import wave
 
-# pip install pysndfx
-# apt install sox
-files = glob.glob('output/*')
+files = glob.glob('python/output/*')
 for f in files:
     os.remove(f)
 
@@ -34,50 +31,42 @@ filename = args.input
 
 sound1 = AudioSegment.from_wav(filename)
 filenameOutput = "output/output_" + time.strftime("%Y%m%d-%H%M%S") + ".wav"
-normalized_sound = match_target_amplitude(sound1, -20.0)  # normalized
+normalized_sound = match_target_amplitude(sound1, -16.0)  # normalized
 normalized_sound.export(filenameOutput, format="wav")
-
 # ----------------------------------------
-# start mixing output with fxs
+# stretch output into new file
 # ----------------------------------------
-
-fx = (
-    AudioEffectsChain()
-        #.highshelf()
-        #.lowshelf()
-        #.phaser()
-        .reverb()
-    # .delay()
-)
-
-infile = filenameOutput
-outfilePs = "output/output_" + os.path.basename(filenameOutput) + '.ogg'
-outfilePsWAv = "output/output_" + os.path.basename(filenameOutput) + '.wav'
-# Apply phaser and reverb directly to an audio file.
-fx(infile, outfilePs)
-# Or, apply the effects directly to a ndarray.
-y, sr = load(infile, sr=None)
-y = fx(y)
-# Apply the effects and return the results as a ndarray.
-y = fx(infile)
-# Apply the effects to a ndarray but store the resulting audio to disk.
-fx(y, outfilePs)
-
-import soundfile as sf
-data, samplerate = sf.read(outfilePs)
-sf.write(outfilePsWAv, data, samplerate)
-
+outfilePs = "output/ps_" + os.path.basename(filenameOutput) + '_p.wav'
+SoundStretch(filenameOutput, outfilePs, 1.0, 0.35)  # 0.25
 # ----------------------------------------
 # mix stretched file with original output
 # ----------------------------------------
-sound10 = AudioSegment.from_wav(filenameOutput).apply_gain(-3)
+sound10 = AudioSegment.from_wav(filenameOutput).apply_gain(-3)  # .apply_gain_stereo(+4, +2).pan(+0.25)
 
-sound20 = AudioSegment.from_wav(outfilePsWAv)
-sound20 = sound20.low_pass_filter(2150)  # 2150
+sound20 = AudioSegment.from_wav(outfilePs)
+sound20 = sound20.high_pass_filter(1150)  # 2150
 # sound20 = sound20.low_pass_filter(3150)
-sound20 = sound20.apply_gain_stereo(+8, +4).pan(-0.25).apply_gain(-9)  # +7  /-025
+sound20 = sound20.apply_gain_stereo(+6, +6).pan(-0.25).apply_gain(-3)  # +7  /-025
 combined_sounds = sound20.overlay(sound10, position=0, gain_during_overlay=-12)
 
 overlayOutput = "output/mixoverlay_" + time.strftime("%Y%m%d-%H%M%S") + ".wav"
-normalized_sound = match_target_amplitude(combined_sounds, -18.0)  # normalized
+normalized_sound = match_target_amplitude(combined_sounds, -16.0)  # normalized
 normalized_sound.export(overlayOutput, format="wav")
+
+
+"""
+# alternative for multiple files - do a copy into separate folder
+overlayOutput = "output/" + os.path.basename(filename)
+normalized_sound = match_target_amplitude(combined_sounds, -16.0)  # normalized
+normalized_sound.export(overlayOutput, format="wav")
+
+from shutil import copyfile
+copyfile(overlayOutput, "done/" + os.path.basename(filename))
+"""
+
+"""
+# bash batch for multiple files
+for i in {001..002}; do python3 zmix_master_sound1_preset2.py --input load/fumix$i.wav; done 
+"""
+
+

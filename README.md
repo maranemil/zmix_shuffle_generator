@@ -4,7 +4,7 @@
 >
 > Logic 
 
-[![Editor Screen](https://raw.githubusercontent.com/maranemil/zmix_shuffle_generator/master/demosample/Screenshot3.png)](#features)
+[![Editor Screen](https://raw.githubusercontent.com/maranemil/zmix_shuffle_generator/master/demo_sample/Screenshot3.png)](#features)
 >
 >
 
@@ -63,7 +63,7 @@ https://pypi.org/project/colorama/
 ### Usage Example Screenshot
 
 #### Python
-[![Editor Screen](https://raw.githubusercontent.com/maranemil/zmix_shuffle_generator/master/demosample/Screenshot2.png)]
+[![Editor Screen](https://raw.githubusercontent.com/maranemil/zmix_shuffle_generator/master/demo_sample/Screenshot2.png)]
 
 ##### Usage Options for Python
 
@@ -86,7 +86,7 @@ options | description
 -->
 
 #### Bash
-[![Editor Screen](https://raw.githubusercontent.com/maranemil/zmix_shuffle_generator/master/demosample/Screenshot1.png)]
+[![Editor Screen](https://raw.githubusercontent.com/maranemil/zmix_shuffle_generator/master/demo_sample/Screenshot1.png)]
 
 
 ##### Usage Options for Bash

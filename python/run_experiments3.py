@@ -17,14 +17,13 @@ import time
 ##############################################
 import glob
 
-files = glob.glob('output/*')
+files = glob.glob('python/output/*')
 for f in files:
     os.remove(f)
 
 # ----------------------------------------
-# create shuffle list from spited files
+# create shuffle list from spitted files
 # ----------------------------------------
-
 SPLIT_FOLDER = 'split/'
 files_list = [os.path.join(folder, i) for folder, subdirs, files in os.walk(SPLIT_FOLDER) for i in files]
 # files_list = files_list[7:19]  # from 7 to 19
@@ -44,7 +43,7 @@ def match_target_amplitude(sound, target_dBFS):
 # ----------------------------------------
 # Iterate
 # ----------------------------------------
-octaves = 0.0  # 0.3 0.2
+octaves = 0.9  # 0.3 0.2
 for i in files_list:
     time.sleep(2)
 
@@ -67,22 +66,26 @@ for i in files_list:
     # sound5 = sound5.reverse()
     # sound6 = sound6.fade_in(200).fade_out(200).reverse()
 
-    sound1 = sound1.fade_in(100).fade_out(500).apply_gain_stereo(-1, +6).pan(-0.15)
-    sound2 = sound2.fade_in(100).fade_out(500).apply_gain_stereo(+6, +2).pan(+0.15)
+    sound1 = sound1.fade_in(50).fade_out(50).apply_gain_stereo(-1, +6).pan(-0.15)
+
+    # mix sound2 with sound1, starting at 5000ms into sound1)
+    sound2 = sound1.overlay(sound2, position=1000)
+    # sound2 = sound2.fade_in(100).fade_out(100).apply_gain_stereo(+6, +2).pan(+0.15)
 
     new_sample_rate = int(sound3.frame_rate * (1.2 ** octaves))  # 1.1
-    hipitch_sound = sound3._spawn(sound3.raw_data, overrides={'frame_rate': new_sample_rate}).set_frame_rate(44100)
-    sound3 = hipitch_sound  # .reverse()
+    pitch_sound = sound3._spawn(sound3.raw_data, overrides={'frame_rate': new_sample_rate}).set_frame_rate(44100)
+    sound3 = pitch_sound
 
-    new_sample_rate = int(sound4.frame_rate * (0.9 ** octaves))  # 2.6
-    hipitch_sound = sound4._spawn(sound4.raw_data, overrides={'frame_rate': new_sample_rate}).set_frame_rate(44100)
-    sound4 = hipitch_sound.apply_gain_stereo(+6, +1)  # .reverse()
+    new_sample_rate = int(sound4.frame_rate * (0.8 ** octaves))  # 2.6
+    pitch_sound = sound4._spawn(sound4.raw_data, overrides={'frame_rate': new_sample_rate}).set_frame_rate(44100)
+    sound4 = pitch_sound.apply_gain_stereo(+6, +1)  # .reverse()
 
-    new_sample_rate5 = int(sound5.frame_rate * (1.9 ** octaves))  # 1.2
-    hipitch_sound5 = sound5._spawn(sound5.raw_data, overrides={'frame_rate': new_sample_rate5}).set_frame_rate(44100)
-    sound5 = hipitch_sound5.apply_gain_stereo(+2, +6)  # .reverse()
+    new_sample_rate5 = int(sound5.frame_rate * (0.5 ** octaves))  # 1.2
+    pitch_sound = sound5._spawn(sound5.raw_data, overrides={'frame_rate': new_sample_rate5}).set_frame_rate(44100)
+    sound5 = pitch_sound.apply_gain_stereo(+2, +6)
 
-    sound6 = sound6.fade_in(400).fade_out(400).apply_gain_stereo(+2, +1)
+    # sound6 = sound6.fade_in(400).fade_out(400).apply_gain_stereo(+2, +1)
+    sound6 = sound5.overlay(sound6, position=1000)
 
     combined_sounds = sound1 + sound2 + sound3 + sound4 + sound5 + sound6
     filenameOutput = "output/output_" + time.strftime("%Y%m%d-%H%M%S") + ".wav"
@@ -96,10 +99,15 @@ for i in files_list:
     fx = (
         AudioEffectsChain()
             # .highshelf()
-            .reverb()
+            # .lowshelf()
             .phaser()
-        # .delay()
-        # .lowshelf()
+            .reverb()
+            # .delay()
+            .normalize()
+        # .equalizer()
+        # .chorus()
+        # .limiter(2)
+        # .noise_reduction(0.5)
     )
 
     infile = filenameOutput

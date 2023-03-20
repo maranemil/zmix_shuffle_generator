@@ -25,7 +25,7 @@ print("------------------start---------------------------")
 
 # clean folder content before generating new files
 print("Remove temp split files")
-files = glob.glob('split/*')
+files = glob.glob('python/split/*')
 for f in files:
     os.remove(f)
 
@@ -68,7 +68,7 @@ print("Split files Done!")
 # clean folder content before generating new files
 print("Remove temp output files")
 if args.clean:
-    files = glob.glob('output/*')
+    files = glob.glob('python/output/*')
     for f in files:
         os.remove(f)
 

@@ -13,7 +13,7 @@ import time
 import time
 import wave
 
-files = glob.glob('output/*')
+files = glob.glob('python/output/*')
 for f in files:
     os.remove(f)
 

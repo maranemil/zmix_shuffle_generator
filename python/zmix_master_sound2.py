@@ -16,7 +16,7 @@ import wave
 
 # pip install pysndfx
 # apt install sox
-files = glob.glob('output/*')
+files = glob.glob('python/output/*')
 for f in files:
     os.remove(f)
 
@@ -34,23 +34,49 @@ filename = args.input
 
 sound1 = AudioSegment.from_wav(filename)
 filenameOutput = "output/output_" + time.strftime("%Y%m%d-%H%M%S") + ".wav"
-normalized_sound = match_target_amplitude(sound1, -18.0)  # normalized
+normalized_sound = match_target_amplitude(sound1, -20.0)  # normalized
 normalized_sound.export(filenameOutput, format="wav")
+
 # ----------------------------------------
-# stretch output into new file
+# start mixing output with fxs
 # ----------------------------------------
-outfilePs = "output/ps_" + os.path.basename(filenameOutput) + '_p.wav'
-SoundStretch(filenameOutput, outfilePs, 1.0, 0.35)  # 0.25
+
+fx = (
+    AudioEffectsChain()
+        #.highshelf()
+        #.lowshelf()
+        #.phaser()
+        .reverb()
+    # .delay()
+)
+
+infile = filenameOutput
+outfilePs = "output/output_" + os.path.basename(filenameOutput) + '.ogg'
+outfilePsWAv = "output/output_" + os.path.basename(filenameOutput) + '.wav'
+# Apply phaser and reverb directly to an audio file.
+fx(infile, outfilePs)
+# Or, apply the effects directly to a ndarray.
+y, sr = load(infile, sr=None)
+y = fx(y)
+# Apply the effects and return the results as a ndarray.
+y = fx(infile)
+# Apply the effects to a ndarray but store the resulting audio to disk.
+fx(y, outfilePs)
+
+import soundfile as sf
+data, samplerate = sf.read(outfilePs)
+sf.write(outfilePsWAv, data, samplerate)
+
 # ----------------------------------------
 # mix stretched file with original output
 # ----------------------------------------
-sound10 = AudioSegment.from_wav(filenameOutput).apply_gain(-3) # .apply_gain_stereo(+4, +2).pan(+0.25)
+sound10 = AudioSegment.from_wav(filenameOutput).apply_gain(-3)
 
-sound20 = AudioSegment.from_wav(outfilePs)
-sound20 = sound20.high_pass_filter(3150)  # 2150
+sound20 = AudioSegment.from_wav(outfilePsWAv)
+sound20 = sound20.low_pass_filter(2150)  # 2150
 # sound20 = sound20.low_pass_filter(3150)
-sound20 = sound20.apply_gain_stereo(+6, +6).pan(-0.25).apply_gain(-3)  # +7  /-025
-combined_sounds = sound20.overlay(sound10, position=0, gain_during_overlay=-6)
+sound20 = sound20.apply_gain_stereo(+8, +4).pan(-0.25).apply_gain(-9)  # +7  /-025
+combined_sounds = sound20.overlay(sound10, position=0, gain_during_overlay=-12)
 
 overlayOutput = "output/mixoverlay_" + time.strftime("%Y%m%d-%H%M%S") + ".wav"
 normalized_sound = match_target_amplitude(combined_sounds, -18.0)  # normalized
