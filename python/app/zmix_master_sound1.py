@@ -44,7 +44,7 @@ SoundStretch(filenameOutput, outfilePs, 1.0, 0.35)  # 0.25
 # ----------------------------------------
 # mix stretched file with original output
 # ----------------------------------------
-sound10 = AudioSegment.from_wav(filenameOutput).apply_gain(-3) # .apply_gain_stereo(+4, +2).pan(+0.25)
+sound10 = AudioSegment.from_wav(filenameOutput).apply_gain(-3)  # .apply_gain_stereo(+4, +2).pan(+0.25)
 
 sound20 = AudioSegment.from_wav(outfilePs)
 sound20 = sound20.high_pass_filter(3150)  # 2150

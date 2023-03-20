@@ -1,0 +1,9 @@
+version: '2.3'
+services:
+  randome:
+    tty: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./app:/home

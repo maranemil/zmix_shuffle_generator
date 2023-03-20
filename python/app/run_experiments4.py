@@ -17,7 +17,7 @@ import time
 ##############################################
 import glob
 
-files = glob.glob('python/output/*')
+files = glob.glob('./output/*')
 for f in files:
     os.remove(f)
 
@@ -58,7 +58,6 @@ octaves = random.choice(octavesList)  # 0.3 0.2
 # Iterate
 # ----------------------------------------
 for i in files_list:
-
     time.sleep(2)
 
     # create new segments

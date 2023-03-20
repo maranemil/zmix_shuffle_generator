@@ -61,7 +61,3 @@ combined_sounds = sound20.overlay(sound15, position=0, gain_during_overlay=-12)
 overlayOutput = "output/mixoverlay_" + time.strftime("%Y%m%d-%H%M%S") + ".wav"
 normalized_sound = match_target_amplitude(combined_sounds, -16.0)  # normalized
 normalized_sound.export(overlayOutput, format="wav")
-
-
-
-

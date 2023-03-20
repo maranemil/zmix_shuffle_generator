@@ -17,7 +17,7 @@ import time
 ##############################################
 import glob
 
-files = glob.glob('python/output/*')
+files = glob.glob('./output/*')
 for f in files:
     os.remove(f)
 
@@ -95,9 +95,9 @@ for i in files_list:
 
     fx = (
         AudioEffectsChain()
-            # .highshelf()
-            .reverb()
-            .phaser()
+        # .highshelf()
+        .reverb()
+        .phaser()
         # .delay()
         # .lowshelf()
     )

@@ -1,0 +1,67 @@
+#############################################################
+Piano wav
+#############################################################
+
+https://freewavesamples.com/sample-type/synthesizer/piano
+https://theremin.music.uiowa.edu/MISpiano.html
+https://freesound.org/people/Jaz_the_MAN_2/packs/17749/
+https://freesound.org/people/pinkyfinger/sounds/68441/
+https://freesound.org/people/pinkyfinger/sounds/68448/
+https://www.kozco.com/tech/soundtests.html
+
+Normalize those recordings for length, volume, and start time, try:
+ffmpeg -i Piano.ff.Gb7.aiff -af loudnorm,silenceremove=start_periods=1:start_silence=0.05:start_threshold=-40dB,afade=out:st=3:d=1.5,afade=in:st=0:d=0.05 -to 4.5 out.m4a
+
+https://www.kozco.com/tech/piano2.wav
+
+##########################################################################
+fibonacci
+##########################################################################
+
+// http://www.phptester.net/
+// https://www.biancahoegel.de/mathe/folge/fibonacci_folge.html
+// https://www.vtad.de/lexikon/fibonacci/
+// 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987
+
+/*
+function getFib($n)
+{
+    return round(pow((sqrt(5)+1)/2, $n) / sqrt(5));
+}
+
+function fibonacci($n,$first = 0,$second = 1)
+{
+    $fib = [$first,$second];
+    for($i=1;$i<$n;$i++)
+    {
+        $fib[] = $fib[$i]+$fib[$i-1];
+    }
+    return $fib;
+}
+echo "<pre>";
+print_r(fibonacci(16));
+$arr_fibonacci = array_unique(array_filter(fibonacci(10)));
+*/
+
+foreach (range(1, 16) as $number) {
+    $arr_numbers[] = $number;
+}
+
+$arr_slice = array_chunk($arr_numbers,4);
+
+foreach($arr_slice as $slice){
+	print "<li>";
+	foreach($slice as $dnumber){
+		print "<button>$dnumber</button>";
+	}
+	print "</li>";
+}
+// https://github.com/bbx10/SFX-I2S-web-trigger/tree/master/data
+// https://www.noiiz.com/sounds/instruments/34
+// https://www.findsounds.com/ISAPI/search.dll?keywords=piano
+// https://lmms.io/lsp/?action=show&file=4346
+
+$arr_sounds = [
+"https://github.com/bbx10/SFX-I2S-web-trigger/blob/master/data/T0.wav?raw=true",
+];
+

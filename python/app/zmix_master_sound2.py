@@ -43,10 +43,10 @@ normalized_sound.export(filenameOutput, format="wav")
 
 fx = (
     AudioEffectsChain()
-        #.highshelf()
-        #.lowshelf()
-        #.phaser()
-        .reverb()
+    # .highshelf()
+    # .lowshelf()
+    # .phaser()
+    .reverb()
     # .delay()
 )
 
@@ -64,6 +64,7 @@ y = fx(infile)
 fx(y, outfilePs)
 
 import soundfile as sf
+
 data, samplerate = sf.read(outfilePs)
 sf.write(outfilePsWAv, data, samplerate)
 

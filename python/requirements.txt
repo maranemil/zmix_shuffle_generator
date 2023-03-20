@@ -1,0 +1,7 @@
+pydub
+pysndfx
+librosa
+soundstretch
+numpy
+scipy
+

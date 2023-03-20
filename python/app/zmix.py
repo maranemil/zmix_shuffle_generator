@@ -15,17 +15,11 @@ import glob
 # WAV Splitter
 #############################################
 
-"""
-pip install pydub
-usage 
-python zmix.py --input load/input.wav  --clean true --reverse true
-"""
-
 print("------------------start---------------------------")
 
 # clean folder content before generating new files
 print("Remove temp split files")
-files = glob.glob('python/split/*')
+files = glob.glob('./split/*')
 for f in files:
     os.remove(f)
 
@@ -68,7 +62,7 @@ print("Split files Done!")
 # clean folder content before generating new files
 print("Remove temp output files")
 if args.clean:
-    files = glob.glob('python/output/*')
+    files = glob.glob('./output/*')
     for f in files:
         os.remove(f)
 

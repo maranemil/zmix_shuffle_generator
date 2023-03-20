@@ -6,10 +6,6 @@
 #
 #############################################
 
-# requirements
-# sudo apt install rubberband-cli
-# sudo apt install ffmpeg
-
 #shopt -s nullglob dotglob
 
 while getopts i:h:d:t:s: option; do

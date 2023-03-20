@@ -7,7 +7,7 @@ import random
 import time
 import glob
 
-files = glob.glob('python/output/*')
+files = glob.glob('./output/*')
 for f in files:
     os.remove(f)
 
