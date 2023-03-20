@@ -9,8 +9,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get -y install \
     build-essential wget rubberband-cli sox ffmpeg
 
-#
-
 WORKDIR /home
 COPY app .
 
