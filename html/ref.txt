@@ -1,0 +1,308 @@
+############################################################
+Generating sound on the fly with javascript/html5
+############################################################
+
+https://marcgg.com/blog/2016/11/01/javascript-audio/
+https://gist.github.com/marcgg/94e97def0e8694f906443ed5262e9cbb
+https://pages.mtu.edu/~suits/notefreqs.html
+https://www.tutorialspoint.com/Generating-sound-on-the-fly-with-JavaScript-HTML5
+https://stackoverflow.com/questions/6343450/generating-sound-on-the-fly-with-javascript-html5
+https://stackoverflow.com/questions/6343450/generating-sound-on-the-fly-with-javascript-html5
+https://stackoverflow.com/questions/879152/how-do-i-make-javascript-beep
+https://jsbin.com/tupoyi/4/edit?html,js
+https://pierfrancesco-soffritti.medium.com/sound-generation-with-javascript-57b2fda65608
+https://noisehack.com/generate-noise-web-audio-api/
+https://keithwhor.com/music/
+https://www.agiletrailblazers.com/blog/modernized-technology/quick-start-to-generate-tones-in-javascript
+https://tonejs.github.io/
+https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio
+https://gist.github.com/horndude77/11361875
+https://www.w3schools.com/html/html5_audio.asp
+https://onlinetonegenerator.com/
+
+# Produce a Simple Beep
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+var context = new AudioContext()
+var o = context.createOscillator()
+o.type = "sine" // Sine Square Triangle Sawtooth
+o.connect(context.destination)
+o.start()
+
+Getting Rid Of The Clicking Sound
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+var context = new AudioContext()
+var o = context.createOscillator()
+var  g = context.createGain()
+g.gain.exponentialRampToValueAtTime(
+  0.00001, context.currentTime - 0.04
+)
+o.connect(g)
+g.connect(context.destination)
+o.start(0)
+
+
+Set A Ringing Effect
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+g.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + X)
+
+
+Playing Actual Notes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+var frequency = 440.0
+o.frequency.value = frequency
+
+
+
+261.6Hz (C4) 440Hz (A4) 830.6Hz (G#5)
+174.6Hz (F3) - Square 1109Hz (C#6) - Sawtooth 87.31 Hz (F2) - Triangle
+
+--
+
+var context = new (window.AudioContext || window.webkitAudioContext)();
+var osc = context.createOscillator(); // instantiate an oscillator
+osc.type = 'sine'; // this is the default - also square, sawtooth, triangle
+osc.frequency.value = 440; // Hz
+osc.connect(context.destination); // connect it to the destination
+osc.start(); // start the oscillator
+osc.stop(context.currentTime + 2); // stop 2 seconds after the current time
+
+
+
+var context = new webkitAudioContext();
+var osc = context.createOscillator();
+var vol = context.createGain();
+vol.gain.value = 0.1; // from 0 to 1, 1 full volume, 0 is muted
+osc.connect(vol); // connect osc to vol
+vol.connect(context.destination); // connect vol to context destination
+osc.start(context.currentTime + 3); // start it three seconds from now
+
+
+var context = new AudioContext();
+var oscillator = context.createOscillator();
+oscillator.type = "sine";
+oscillator.frequency.value = 800;
+oscillator.connect(context.destination);
+oscillator.start();
+// Beep for 500 milliseconds
+setTimeout(function () {
+    oscillator.stop();
+}, 100);
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+White Noise
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+var bufferSize = 2 * audioContext.sampleRate,
+    noiseBuffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate),
+    output = noiseBuffer.getChannelData(0);
+for (var i = 0; i < bufferSize; i++) {
+    output[i] = Math.random() * 2 - 1;
+}
+
+var whiteNoise = audioContext.createBufferSource();
+whiteNoise.buffer = noiseBuffer;
+whiteNoise.loop = true;
+whiteNoise.start(0);
+
+whiteNoise.connect(audioContext.destination);
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ pink noise
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+var bufferSize = 4096;
+var pinkNoise = (function() {
+    var b0, b1, b2, b3, b4, b5, b6;
+    b0 = b1 = b2 = b3 = b4 = b5 = b6 = 0.0;
+    var node = audioContext.createScriptProcessor(bufferSize, 1, 1);
+    node.onaudioprocess = function(e) {
+        var output = e.outputBuffer.getChannelData(0);
+        for (var i = 0; i < bufferSize; i++) {
+            var white = Math.random() * 2 - 1;
+            b0 = 0.99886 * b0 + white * 0.0555179;
+            b1 = 0.99332 * b1 + white * 0.0750759;
+            b2 = 0.96900 * b2 + white * 0.1538520;
+            b3 = 0.86650 * b3 + white * 0.3104856;
+            b4 = 0.55000 * b4 + white * 0.5329522;
+            b5 = -0.7616 * b5 - white * 0.0168980;
+            output[i] = b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362;
+            output[i] *= 0.11; // (roughly) compensate for gain
+            b6 = white * 0.115926;
+        }
+    }
+    return node;
+})();
+
+pinkNoise.connect(audioContext.destination);
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Brownian Noise
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+var bufferSize = 4096;
+var brownNoise = (function() {
+    var lastOut = 0.0;
+    var node = audioContext.createScriptProcessor(bufferSize, 1, 1);
+    node.onaudioprocess = function(e) {
+        var output = e.outputBuffer.getChannelData(0);
+        for (var i = 0; i < bufferSize; i++) {
+            var white = Math.random() * 2 - 1;
+            output[i] = (lastOut + (0.02 * white)) / 1.02;
+            lastOut = output[i];
+            output[i] *= 3.5; // (roughly) compensate for gain
+        }
+    }
+    return node;
+})();
+
+brownNoise.connect(audioContext.destination);
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Tone Generator 1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+frequency
+<input type="range" id="fIn" min="40" max="6000" oninput="show()" />
+<span id="fOut"></span><br>
+type
+<input type="range" id="tIn" min="0" max="3" oninput="show()" />
+<span id="tOut"></span><br>
+volume
+<input type="range" id="vIn" min="0" max="100" oninput="show()" />
+<span id="vOut"></span><br>
+duration
+<input type="range" id="dIn" min="1" max="5000" oninput="show()" />
+<span id="dOut"></span>
+<br>
+<button onclick='beep();'>Play</button>
+
+<script>
+audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+
+show();
+
+function show() {
+  frequency = document.getElementById("fIn").value;
+  document.getElementById("fOut").innerHTML = frequency + ' Hz';
+
+  switch (document.getElementById("tIn").value * 1) {
+    case 0: type = 'sine'; break;
+    case 1: type = 'square'; break;
+    case 2: type = 'sawtooth'; break;
+    case 3: type = 'triangle'; break;
+  }
+  document.getElementById("tOut").innerHTML = type;
+
+  volume = document.getElementById("vIn").value / 100;
+  document.getElementById("vOut").innerHTML = volume;
+
+  duration = document.getElementById("dIn").value;
+  document.getElementById("dOut").innerHTML = duration + ' ms';
+}
+
+function beep() {
+  var oscillator = audioCtx.createOscillator();
+  var gainNode = audioCtx.createGain();
+
+  oscillator.connect(gainNode);
+  gainNode.connect(audioCtx.destination);
+
+  gainNode.gain.value = volume;
+  oscillator.frequency.value = frequency;
+  oscillator.type = type;
+
+  oscillator.start();
+
+  setTimeout(
+    function() {
+      oscillator.stop();
+    },
+    duration
+  );
+};
+</script>
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Tone Generator 2
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <title>Tone Generator</title>
+
+<script>
+
+var context = null;
+var usingWebAudio = true;
+if (typeof AudioContext !== 'undefined') {
+  context = new AudioContext();
+} else if (typeof webkitAudioContext !== 'undefined') {
+  context = new webkitAudioContext();
+} else {
+  usingWebAudio = false;
+}
+
+var playing = false;
+var osc = null;
+var freq = 440;
+var STEP_CONSTANT = Math.pow(2.0, 1.0/12.0);
+
+function toggle() {
+  var button = document.getElementById("toggle");
+  if (playing && osc) {
+    playing = false;
+    osc.stop(0);
+    button.value = "Play";
+  } else {
+    playing = true;
+    osc = context.createOscillator();
+    osc.connect(context.destination);
+    osc.frequency.value = freq;
+    osc.start(0);
+    button.value = "Stop";
+  }
+}
+
+function updateFreq(newFreq) {
+  freq = newFreq;
+  if (osc) {
+    osc.frequency.value = freq;
+  }
+  var text = document.getElementById("freqText").value = freq;
+  var range = document.getElementById("freqRange").value = freq;
+}
+
+window.onload = function() {
+  if (!usingWebAudio) {
+    document.getElementById("audioControls").innerHTML = "<p>Web audio required.</p>"
+  }
+}
+
+</script>
+</head>
+
+<body>
+  <div id="audioControls">
+    <input id="freqText" type="text" value="440" onchange="updateFreq(this.value)"/>
+    <input type="button" value="-1 octave" onclick="updateFreq(freq / 2)"/>
+    <input type="button" value="-1 half-step" onclick="updateFreq(freq / STEP_CONSTANT)"/>
+    <input type="button" value="+1 half-step" onclick="updateFreq(freq * STEP_CONSTANT)"/>
+    <input type="button" value="+1 octave" onclick="updateFreq(freq * 2)"/>
+    <br>
+    <input id="freqRange" type="range" min="0" max="1760" value="440" oninput="updateFreq(this.value)"/>
+    <br>
+    <input id="toggle" type="button" value="Play" onclick="toggle()"/>
+  </div>
+</body>
+</html>
+
