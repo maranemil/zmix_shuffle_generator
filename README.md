@@ -65,7 +65,7 @@ https://pypi.org/project/colorama/
 # create container 
 docker run -it --rm -v ./src:/app ubuntu:23.04 /bin/bash;
 
-# install packages
+# install packages in container
 apt update && apt install wget git nano curl -y
 apt install ffmpeg python3-pip sox rubberband-lv2 rubberband-cli  -y
 
@@ -77,8 +77,8 @@ chmod -R 777 .
 cd /app/zmix_shuffle_generator/bash/app
 
 # mix
-bash zmix.sh -iload/out.wav -d yes -t *
-bash zmix_pitch.sh -iload/out.wav -d yes -t *
+bash zmix.sh -i load/out.wav -d yes -t *
+bash zmix_pitch.sh -i load/out.wav -d yes -t *
 ```
 
 
